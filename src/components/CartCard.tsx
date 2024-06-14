@@ -1,7 +1,9 @@
 //import styles from "../views/Cart.module.css";
 import { useRef } from "react";
+import Product from "../interfaces/Product";
+import ProductProp from "../interfaces/ProductProp";
 
-export default function CartCard({ product }) {
+// export default function CartCard({ product }) {
     // id, title, price, colors, images, description, quantity
     // title,
     // photo,
@@ -10,12 +12,14 @@ export default function CartCard({ product }) {
     // quantity,
     // color }) {
 
+export default function CartCard(props: ProductProp) {
+    const { product } = props;
     const { id, title, price, colors, images, description, units } = product;
     //const unitsRef = useRef(quantity);
     const unitsRef = useRef(units); // Renombrar la ref para evitar conflicto
     const manageUnits = () => {
         let productsOnCart = JSON.parse(localStorage.getItem("cart")) || [];
-        const one = productsOnCart.find((each) => each.id === id);
+        const one = productsOnCart?.find((each: Product) => each.id === id);
         if (one) {
             one.units = Number(unitsRef.current.value);
             localStorage.setItem("cart", JSON.stringify(productsOnCart));

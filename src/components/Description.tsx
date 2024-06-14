@@ -1,6 +1,8 @@
 // import styles from "./Description.module.css"
 
-export default function Description({ product }) {
+//export default function Description({ product }) {
+export default function Description(props: ProductProp) {
+  const { product } = props;
     return (
       // <section className={styles["product-description-block"]}>
       //   <h1 className={styles["product-title"]}>{product.title}</h1>

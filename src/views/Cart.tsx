@@ -5,9 +5,11 @@ import NavBar from "../components/NavBar";
 import Hero from "../components/Hero";
 import CartCard from "../components/CartCard";
 import CartResume from "../components/CartResume";
+import Product from "../interfaces/Product";
 
 function Cart() {
-  const [productsOnCart, setProductsOnCart] = useState([]);
+  const [productsOnCart, setProductsOnCart] = useState<Product[]>([]);
+  const totalPrice = productsOnCart.reduce((acc, each: Product)=>acc+ each.price*each.units , 0);
 
   useEffect(() => {
     if (localStorage.getItem("cart")) {
@@ -30,8 +32,8 @@ function Cart() {
           color="black"
         /> */}
         <section className="flex flex-col">
-          {productsOnCart.map((product) => (
-              <CartCard key={product.id} product={product}
+          {productsOnCart.map((each: Product) => (
+              <CartCard key={each.id} product={each}
                 // key={each.id}
                 // id={each.id}
                 // title={each.title}
@@ -44,7 +46,7 @@ function Cart() {
             ))}
         </section>
         <CartResume 
-          total="90"
+          total={totalPrice}
         />
       </main>
       <Footer />

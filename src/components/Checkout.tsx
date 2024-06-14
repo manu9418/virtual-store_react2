@@ -1,7 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 //import styles from "./Checkout.module.css";
+import Product from "../interfaces/Product";
+import ProductProp from "../interfaces/ProductProp";
 
-export default function Checkout({ product }) {
+// export default function Checkout({ product }) {
+export default function Checkout(props: ProductProp) {
+  const { product } = props;
   const [quantity, setQuantity] = useState(1);
   const [button, setButton] = useState(false);
   const units = useRef(1);
@@ -12,7 +16,8 @@ export default function Checkout({ product }) {
     } else {
       localStorage.setItem("cart", JSON.stringify([]));
     }
-    const one = productsOnCart.find((item) => item.id === product.id);
+    // El uso de ?. (optional chaining) asegura que la aplicación no lance un error si productsOnCart es null o undefined. Esto es útil en escenarios donde productsOnCart puede no estar inicializado.
+    const one = productsOnCart?.find((item:Product) => item.id === product.id);
     if (one) {
       setQuantity(one.units);
       setButton(true);
@@ -26,13 +31,13 @@ export default function Checkout({ product }) {
     if (localStorage.getItem("cart")) {
       productsOnCart = JSON.parse(localStorage.getItem("cart"));
     }
-    const one = productsOnCart.find((each) => each.id === product.id);
+    const one = productsOnCart?.find((each: Product) => each.id === product.id);
     if (!one) {
       product.units = Number(units.current.value);
       productsOnCart.push(product);
       setButton(true);
     } else {
-      productsOnCart = productsOnCart.filter((each) => each.id !== product.id);
+      productsOnCart = productsOnCart.filter((each: Product) => each.id !== product.id);
       setButton(false);
     }
     localStorage.setItem("cart", JSON.stringify(productsOnCart));
