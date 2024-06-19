@@ -6,17 +6,28 @@ import Hero from "../components/Hero";
 import CartCard from "../components/CartCard";
 import CartResume from "../components/CartResume";
 import Product from "../interfaces/Product";
+//import { useDispatch } from "react-redux";
+// import { calculateTotal } from "../store/actions/products";
 
 function Cart() {
   const [productsOnCart, setProductsOnCart] = useState<Product[]>([]);
-  const totalPrice = productsOnCart.reduce((acc, each: Product)=>acc+ each.price*each.units , 0);
 
+  const totalPrice = productsOnCart.reduce((acc, each: Product)=>acc+ each.price*each.units , 0);
   useEffect(() => {
     if (localStorage.getItem("cart")) {
       const products = JSON.parse(localStorage.getItem("cart"));
       setProductsOnCart(products);
     }
   }, []);
+
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   const products = localStorage.getItem("cart");
+  //   if (products) {
+  //     setProductsOnCart(JSON.parse(products));
+  //     dispatch(calculateTotal({ products: JSON.parse(products) }));
+  //   }
+  // }, []);
 
   return (
     <>

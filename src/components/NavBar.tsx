@@ -1,11 +1,16 @@
 //import styles from "./NavBar.module.css";
 import NavButton from "./NavButton";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { captureText } from "../store/actions/products";
 
 export default function NavBar() {
+
+  const location = useLocation();
+  const pathname = location.pathname;
+  const textStore = useSelector((store) => store.products.text);
 
   const text = useRef();
   const dispatch = useDispatch();
@@ -38,15 +43,17 @@ export default function NavBar() {
         </Link>
         {/* <form className={styles["header-form"]}> */}
         <form className="w-full md:w-1/3 flex items-center flex-grow justify-center py-2 md:py-0">
+        {pathname === "/" && (
           <input
             // className={styles["header-input"]}
             className="h-[60px] border-0 rounded-[15px] w-full p-[10px] my-0 mx-[20px] text-[14px] text-center"
             type="text"
+            defaultValue={textStore}
             placeholder="Search"
             id="search"
             ref={text}
             onChange={setText}
-          />
+          />)}
         </form>
         {/* <ul className={styles["header-social"]}> */}
         <ul className="w-full md:w-1/3 flex items-center flex-grow justify-center pb-2

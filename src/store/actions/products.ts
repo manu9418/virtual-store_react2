@@ -13,7 +13,12 @@ const captureText = createAction(
     // }
 )
 
+const calculateTotal = createAction(
+    "calculateTotal",
+    (obj) => ({ payload: { products: obj.products } })
+  );
+
 //const productsActions = {captureText}
 //export default productsActions
 
-export {captureText}
+export { captureText, calculateTotal };

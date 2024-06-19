@@ -1,11 +1,16 @@
 //import styles from "../views/Cart.module.css";
-interface Props {
-    total: number;
-  }
+
+// interface Props {
+//     total: number;
+//   }
 
 // export default function CartResume({total}) {
+//export default function CartResume() {
 export default function CartResume(props: Props) {
     const { total } = props;
+
+    //const total = useSelector((store) => store.products.total);
+    //console.log(total);
 
     return (
       <>
