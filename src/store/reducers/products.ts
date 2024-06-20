@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { captureText } from "../actions/products";
+import { captureText, calculateTotal } from "../actions/products";
 
 // import { productsActions } from "../actions/products";
 // const {captureText} = productsActions;
